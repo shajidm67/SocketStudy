@@ -53,6 +53,61 @@ Socket programming finds applications in various domains, including web developm
 4.	Networked Games: Online multiplayer games rely on socket programming to facilitate communication between game clients and servers.
 5.	RPC mechanisms: which allow processes to execute code on a remote server, often use socket programming for communication.
 
+## Program 
+import socket
+import threading
+import time
+
+def server():
+    s = socket.socket()
+    s.bind(("127.0.0.1", 7000))
+    s.listen(1)
+    print("Server started...")
+
+    conn, addr = s.accept()
+    print("Connected:", addr)
+
+    data = conn.recv(1024).decode()
+    print("Client sent:", data)
+
+    # Process data (convert to uppercase)
+    result = data.upper()
+    conn.send(result.encode())
+
+    conn.close()
+    s.close()
+
+def client():
+    time.sleep(1)
+
+    c = socket.socket()
+    c.connect(("127.0.0.1", 7000))
+
+    message = "hello server, make me uppercase"
+    print("Sending:", message)
+    c.send(message.encode())
+
+    response = c.recv(1024).decode()
+    print("Server returned:", response)
+
+    c.close()
+
+t1 = threading.Thread(target=server)
+t2 = threading.Thread(target=client)
+
+t1.start()
+t2.start()
+
+t1.join()
+t2.join()
+
+## Output
+PS C:\Users\Good Day>  c:; cd 'c:\Users\Good Day'; & 'c:\Users\Good Day\AppData\Local\Programs\Python\Python313\python.exe' 'c:\Users\Good Day\.vscode\extensions\ms-python.debugpy-2025.18.0-win32-x64\bundled\libs\debugpy\launcher' '57964' '--' 'c:\Users\Good Day\import socket.py' 
+Server started...
+Sending:Connected:  hello server, make me uppercase('127.0.0.1', 57968)
+
+Client sent: hello server, make me uppercase
+Server returned: HELLO SERVER, MAKE ME UPPERCASE
 
 ## Result:
 Thus the study of Socket Programming Completed Successfully
