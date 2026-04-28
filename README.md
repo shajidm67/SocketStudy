@@ -54,6 +54,7 @@ Socket programming finds applications in various domains, including web developm
 5.	RPC mechanisms: which allow processes to execute code on a remote server, often use socket programming for communication.
 
 ## Program 
+```
 import socket
 import threading
 import time
@@ -100,13 +101,14 @@ t2.start()
 
 t1.join()
 t2.join()
-
+```
 ## Output
+```
 Server started...
 Sending:Connected:  hello server, make me uppercase('127.0.0.1', 57968)
 
 Client sent: hello server, make me uppercase
 Server returned: HELLO SERVER, MAKE ME UPPERCASE
-
+```
 ## Result:
 Thus the study of Socket Programming Completed Successfully
